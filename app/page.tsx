@@ -38,16 +38,17 @@ export default function Home() {
       return;
     }
 
-    const callbackUrl = `${typeof window !== "undefined" ? window.location.origin : ""}/api/razorpay/callback`;
+    const verifyUrl = `${window.location.origin}/payment/verify`;
     const options = {
       key: keyId,
       amount: 0, // From order when order_id is used
       currency: "INR" as const,
       order_id: orderId,
-      callback_url: callbackUrl,
-      redirect: true,
       name: "Payment",
       theme: { color: "#3399cc" },
+      handler: (response: { razorpay_order_id: string }) => {
+        window.location.href = `${verifyUrl}?orderId=${encodeURIComponent(response.razorpay_order_id)}`;
+      },
     };
 
     const rzp = new Razorpay(options);

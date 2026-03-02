@@ -7,7 +7,8 @@ function SuccessContent() {
   const searchParams = useSearchParams();
   const razorpayPaymentId = searchParams.get("razorpay_payment_id");
   const orderId = searchParams.get("order_id");
-  const paymentId = searchParams.get("payment_id"); // Your backend's payment_id if passed via callback
+  const paymentId = searchParams.get("payment_id");
+  const referenceId = searchParams.get("reference_id");
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-zinc-50 px-4 dark:bg-zinc-950">
@@ -35,7 +36,7 @@ function SuccessContent() {
         <p className="mb-6 text-center text-zinc-600 dark:text-zinc-400">
           Your payment has been verified successfully.
         </p>
-        {(razorpayPaymentId || orderId || paymentId) && (
+        {(razorpayPaymentId || orderId || paymentId || referenceId) && (
           <div className="space-y-2 rounded-lg bg-zinc-50 p-4 dark:bg-zinc-800/50">
             {razorpayPaymentId && (
               <p className="text-sm text-zinc-600 dark:text-zinc-400">
@@ -47,9 +48,14 @@ function SuccessContent() {
                 <span className="font-medium">Order ID:</span> {orderId}
               </p>
             )}
+            {referenceId && (
+              <p className="text-sm text-zinc-600 dark:text-zinc-400">
+                <span className="font-medium">Reference ID:</span> {referenceId}
+              </p>
+            )}
             {paymentId && (
               <p className="text-sm text-zinc-600 dark:text-zinc-400">
-                <span className="font-medium">Reference ID:</span> {paymentId}
+                <span className="font-medium">Payment Ref:</span> {paymentId}
               </p>
             )}
           </div>
