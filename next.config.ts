@@ -25,6 +25,7 @@ const nextConfig: NextConfig = {
     RAZORPAY_CALLBACK_URL: RAZORPAY_PAYMENT_URLS.callback,
     RAZORPAY_VERIFY_URL: RAZORPAY_PAYMENT_URLS.verify,
   },
+  output: "export",
 };
 
 export default nextConfig;
